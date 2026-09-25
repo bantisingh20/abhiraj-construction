@@ -80,7 +80,7 @@ export const RetrofittingInteractiveTech: React.FC<RetrofittingTechProps> = ({ o
             <span className="text-gold-gradient font-serif italic">Structural Diagnostics Lab</span>
           </h2>
           <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
-            Abhiraj Construction deploys market-leading non-destructive testing (NDT), aerospace-grade carbon fiber (CFRP) wrapping, and precision RCC jacketing to extend the life of aged industrial plants by 25+ years.
+            Abhiraajj Construction deploys market-leading non-destructive testing (NDT), aerospace-grade carbon fiber (CFRP) wrapping, and precision RCC jacketing to extend the life of aged industrial plants by 25+ years.
           </p>
         </motion.div>
 

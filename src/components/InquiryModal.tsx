@@ -36,7 +36,7 @@ export const InquiryModal: React.FC<InquiryModalProps> = ({ isOpen, onClose, pre
 
   const handleWhatsApp = () => {
     playScanSound();
-    const msg = `Hello Mr. Abhinay Palkar (Abhiraj Construction),%0A%0AI would like to consult on a project:%0A- Name: ${formData.name || 'Prospective Client'}%0A- Phone: ${formData.phone || 'N/A'}%0A- Scope: ${formData.projectScope}%0A- Message: ${formData.details || 'Please share initial consultation availability.'}`;
+    const msg = `Hello Mr. Abhinay Palkar (Abhiraaj Construction),%0A%0AI would like to consult on a project:%0A- Name: ${formData.name || 'Prospective Client'}%0A- Phone: ${formData.phone || 'N/A'}%0A- Scope: ${formData.projectScope}%0A- Message: ${formData.details || 'Please share initial consultation availability.'}`;
     window.open(`https://wa.me/91${COMPANY_DETAILS.rawPhone}?text=${msg}`, '_blank');
   };
 
@@ -114,7 +114,7 @@ export const InquiryModal: React.FC<InquiryModalProps> = ({ isOpen, onClose, pre
               <input
                 type="text"
                 required
-                placeholder="e.g. Er. Abhinay / Client Name"
+                placeholder="e.g. Your Name / Company Name"
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                 className="w-full px-4 py-2.5 rounded-xl bg-amber-50/50 border border-amber-200 text-slate-900 placeholder-slate-400 focus:outline-none focus:border-yellow-500 transition-colors"

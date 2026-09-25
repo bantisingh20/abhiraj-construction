@@ -818,7 +818,7 @@ export const BimDigitalTwinSimulator: React.FC<BimSimulatorProps> = ({ onOpenCon
           <div className="text-xs text-slate-400 flex items-center gap-2">
             <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
             <span>
-              All structural designs audited under <strong>IS 456:2000</strong>, <strong>IS 1893:2016</strong>, and <strong>ACI 440.2R</strong> by Abhiraj Construction.
+              All structural designs audited under <strong>IS 456:2000</strong>, <strong>IS 1893:2016</strong>, and <strong>ACI 440.2R</strong> by Abhiraaj Construction.
             </span>
           </div>
 

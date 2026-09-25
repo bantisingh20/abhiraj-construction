@@ -11,7 +11,7 @@ interface LogoProps {
  * Features: Heavy Excavator with yellow boom, cabin, tracks, city skyline silhouette, 
  * and yellow/gold-black brand banner with "Abhiraaj CONSTRUCTION" & "BUILDING DREAMS INTO REALITY"
  */
-export const AbhirajLogo: React.FC<LogoProps> = ({ 
+export const AbhiraajLogo: React.FC<LogoProps> = ({ 
   className = "h-12", 
   variant = 'full',
   light = false 
@@ -40,7 +40,7 @@ export const AbhirajLogo: React.FC<LogoProps> = ({
           
           {/* Brand Letter A */}
           <text x="50" y="85" textAnchor="middle" fill="#FBBF24" fontFamily="Cinzel, serif" fontWeight="900" fontSize="14" letterSpacing="1">
-            ABHIRAAJ
+            Abhiraaj
           </text>
         </svg>
       </div>
@@ -52,7 +52,7 @@ export const AbhirajLogo: React.FC<LogoProps> = ({
       {/* Official Brand Logo Image */}
       <div className="relative shrink-0 w-24 h-24 sm:w-28 sm:h-28 flex items-center justify-center">
         <img
-          src="/pdf-images/Abhiraj Logo.png"
+          src="/pdf-images/Abhiraaj Logo.png"
           alt="Abhiraaj Construction logo"
           className="w-full h-full object-contain"
           loading="eager"

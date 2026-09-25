@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { motion, useScroll, useSpring } from 'motion/react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { AboutSection } from './components/AboutSection';
@@ -13,7 +12,6 @@ import { InteractiveEstimateCalculator } from './components/InteractiveEstimateC
 import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
 import { InquiryModal } from './components/InquiryModal';
-import { CustomCursor } from './components/CustomCursor';
 import { Phone, MessageSquare, Calculator } from 'lucide-react';
 import { COMPANY_DETAILS } from './data/companyData';
 import { playClickSound } from './utils/audioFx';
@@ -22,14 +20,6 @@ export default function App() {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalSubject, setModalSubject] = useState('');
   const [initialContactMsg, setInitialContactMsg] = useState('');
-
-  // Top window scroll progress
-  const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001
-  });
 
   const handleOpenEstimator = () => {
     playClickSound();
@@ -58,16 +48,7 @@ export default function App() {
   return (
     <div className="min-h-screen bg-white text-slate-900 selection:bg-yellow-400 selection:text-slate-950 relative font-sans">
       
-      {/* 1. Custom Interactive Glow Cursor */}
-      <CustomCursor />
-
-      {/* 2. Window Top Scroll Progress Bar */}
-      <motion.div
-        style={{ scaleX }}
-        className="fixed top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-yellow-400 via-amber-400 to-yellow-500 z-[999] origin-left shadow-md shadow-yellow-500/50"
-      />
-
-      {/* 3. Top Navbar */}
+      {/* Top Navbar */}
       <Navbar 
         onOpenEstimator={handleOpenEstimator}
         onOpenInquiryModal={() => handleOpenInquiry('Executive Architectural Consultation')}
@@ -148,7 +129,7 @@ export default function App() {
 
         {/* WhatsApp Floating Button */}
         <a
-          href={`https://wa.me/91${COMPANY_DETAILS.rawPhone}?text=Hello%20Mr.%20Abhinay%20Palkar%20(Abhiraj%20Construction),%20I%20would%20like%20to%20consult%20on%20an%20engineering%20project.`}
+          href={`https://wa.me/91${COMPANY_DETAILS.rawPhone}?text=Hello%20Mr.%20Abhinay%20Palkar%20(Abhiraaj%20Construction),%20I%20would%20like%20to%20consult%20on%20an%20engineering%20project.`}
           target="_blank"
           rel="noopener noreferrer"
           onClick={playClickSound}

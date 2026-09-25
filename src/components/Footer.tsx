@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { HardHat, Phone, Mail, MapPin, ShieldCheck, ArrowUp, Clock } from 'lucide-react';
 import { COMPANY_DETAILS, SERVICES } from '../data/companyData';
-import { AbhirajLogo } from './BrandLogos';
+import { AbhiraajLogo } from './BrandLogos';
 import { playClickSound } from '../utils/audioFx';
 
 export const Footer: React.FC = () => {
@@ -31,7 +31,7 @@ export const Footer: React.FC = () => {
       <div className="border-b border-amber-200/80 py-6 bg-amber-50/60 relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <AbhirajLogo variant="compact" light={false} />
+            <AbhiraajLogo variant="compact" light={false} />
           </div>
 
           <div className="flex flex-wrap items-center gap-4 text-xs font-mono">
@@ -64,7 +64,7 @@ export const Footer: React.FC = () => {
           <div className="lg:col-span-5 space-y-4">
             <div className="flex items-center gap-2">
               <span className="text-xl font-black tracking-wider text-slate-950 uppercase font-serif">
-                ABHIRAJ
+                Abhiraaj
               </span>
               <span className="text-xs px-2.5 py-0.5 rounded-full bg-yellow-300 text-slate-950 font-mono font-black border border-yellow-400">
                 CONSTRUCTION

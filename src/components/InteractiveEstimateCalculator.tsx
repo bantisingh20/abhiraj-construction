@@ -79,7 +79,7 @@ export const InteractiveEstimateCalculator: React.FC<EstimatorProps> = ({ onOpen
 
   const handleWhatsApp = () => {
     playScanSound();
-    const msg = `Hello Mr. Abhinay Palkar (Abhiraj Construction),%0A%0AI used your website Scope Simulator for an estimate:%0A- Scope: ${projectType.toUpperCase()}%0A- Area: ${sqft.toLocaleString()} sq.ft%0A- Structure Age: ${ageOfStructure} Years%0A- NDT Audit Needed: ${includeNDT ? 'Yes' : 'No'}%0A- Estimated Budget: ${getEstimatedBudgetBracket()}%0A- Target Timeline: ${getEstimatedTimeline()}%0A%0APlease provide an architectural technical consultation.`;
+    const msg = `Hello Mr. Abhinay Palkar (Abhiraaj Construction),%0A%0AI used your website Scope Simulator for an estimate:%0A- Scope: ${projectType.toUpperCase()}%0A- Area: ${sqft.toLocaleString()} sq.ft%0A- Structure Age: ${ageOfStructure} Years%0A- NDT Audit Needed: ${includeNDT ? 'Yes' : 'No'}%0A- Estimated Budget: ${getEstimatedBudgetBracket()}%0A- Target Timeline: ${getEstimatedTimeline()}%0A%0APlease provide an architectural technical consultation.`;
     window.open(`https://wa.me/91${COMPANY_DETAILS.rawPhone}?text=${msg}`, '_blank');
   };
 

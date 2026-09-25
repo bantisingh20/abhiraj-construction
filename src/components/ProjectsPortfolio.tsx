@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'motion/react';
-import { Briefcase, MapPin, X, ShieldAlert, CheckCircle2, ArrowUpRight, Award } from 'lucide-react';
+import { Briefcase, MapPin, X, ShieldAlert, CheckCircle2, ArrowUpRight, Award, ChevronLeft, ChevronRight } from 'lucide-react';
 import { PROJECTS } from '../data/companyData';
 import { ProjectItem } from '../types';
 import { playClickSound } from '../utils/audioFx';
@@ -23,6 +24,22 @@ export const ProjectsPortfolio: React.FC<ProjectsProps> = ({ onOpenInquiryModal 
   const filteredProjects = filterCategory === 'all'
     ? PROJECTS
     : PROJECTS.filter((p) => p.category === filterCategory);
+
+  const handleNext = () => {
+    if (!selectedProject) return;
+    playClickSound();
+    const idx = filteredProjects.findIndex((p) => p.id === selectedProject.id);
+    const nextIdx = (idx + 1) % filteredProjects.length;
+    setSelectedProject(filteredProjects[nextIdx]);
+  };
+
+  const handlePrev = () => {
+    if (!selectedProject) return;
+    playClickSound();
+    const idx = filteredProjects.findIndex((p) => p.id === selectedProject.id);
+    const prevIdx = (idx - 1 + filteredProjects.length) % filteredProjects.length;
+    setSelectedProject(filteredProjects[prevIdx]);
+  };
 
   return (
     <section id="projects" className="py-28 bg-[#FFFDF5] relative border-t border-amber-100 text-slate-900 overflow-hidden">
@@ -171,140 +188,173 @@ export const ProjectsPortfolio: React.FC<ProjectsProps> = ({ onOpenInquiryModal 
           </AnimatePresence>
         </motion.div>
 
-        {/* Detailed Case Study Modal */}
+        {/* Detailed Case Study Modal (portaled to body) */}
+        {createPortal(
         <AnimatePresence>
           {selectedProject && (
             <motion.div 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-md"
+              onClick={() => setSelectedProject(null)}
+              className="fixed inset-0 z-[100] flex items-start justify-center px-4 pt-36 pb-8 bg-slate-950/80 backdrop-blur-xl overflow-y-auto"
             >
               <motion.div 
                 initial={{ scale: 0.95, y: 20 }}
                 animate={{ scale: 1, y: 0 }}
                 exit={{ scale: 0.95, y: 20 }}
-                className="bg-white rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl relative max-h-[90vh] overflow-y-auto border border-amber-200 text-slate-900"
+                onClick={(e) => e.stopPropagation()}
+                className="bg-white rounded-3xl w-full max-w-4xl mx-auto p-6 sm:p-8 shadow-2xl relative max-h-[calc(100vh-11rem)] overflow-y-auto border-2 border-amber-300 text-slate-900"
               >
-                {/* Close Button */}
-                <button
-                  onClick={() => setSelectedProject(null)}
-                  className="absolute top-5 right-5 p-2 rounded-xl bg-slate-100 text-slate-600 hover:text-slate-900 hover:bg-slate-200 transition-colors cursor-pointer"
-                >
-                  <X className="w-5 h-5" />
-                </button>
-
-                {/* Modal Header */}
-                <div className="space-y-2 mb-6">
-                  <div className="flex items-center gap-2 text-xs font-mono text-amber-700 font-bold uppercase">
-                    <span>AUTHENTIC CASE STUDY</span>
-                    <span>•</span>
-                    <span>{selectedProject.clientOrLocation}</span>
-                  </div>
-                  <h3 className="text-xl sm:text-2xl font-black text-slate-950">
-                    {selectedProject.title}
-                  </h3>
-                  <div className="flex flex-wrap gap-2 text-xs font-mono text-slate-700 pt-1">
-                    <span className="px-2.5 py-1 bg-yellow-100 border border-yellow-300 rounded text-amber-900 font-bold">
-                      Category: {selectedProject.categoryLabel}
+                {/* Modal Header Bar */}
+                <div className="flex items-center justify-between border-b border-amber-200 pb-4 mb-5">
+                  <div className="flex items-center gap-2 min-w-0">
+                    <span className="px-3 py-1 rounded-full bg-amber-100 text-amber-900 font-mono text-xs font-bold border border-amber-300 shrink-0">
+                      AUTHENTIC CASE STUDY
                     </span>
-                    {selectedProject.ageOrScale && (
-                      <span className="px-2.5 py-1 bg-slate-100 border border-slate-200 rounded text-slate-700 font-semibold">
-                        Scale: {selectedProject.ageOrScale}
-                      </span>
-                    )}
-                    {selectedProject.highlight && (
-                      <span className="px-2.5 py-1 bg-emerald-100 border border-emerald-300 rounded text-emerald-800 font-bold">
-                        {selectedProject.highlight}
-                      </span>
-                    )}
+                    <span className="text-xs font-mono text-slate-500 hidden sm:inline truncate">
+                      ● {selectedProject.clientOrLocation}
+                    </span>
+                  </div>
+
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={handlePrev}
+                      className="p-2 rounded-xl bg-amber-50 hover:bg-amber-100 text-slate-700 border border-amber-200 transition-colors"
+                      title="Previous Project"
+                    >
+                      <ChevronLeft className="w-4 h-4" />
+                    </button>
+                    <button
+                      onClick={handleNext}
+                      className="p-2 rounded-xl bg-amber-50 hover:bg-amber-100 text-slate-700 border border-amber-200 transition-colors"
+                      title="Next Project"
+                    >
+                      <ChevronRight className="w-4 h-4" />
+                    </button>
+                    <button
+                      onClick={() => setSelectedProject(null)}
+                      className="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 transition-colors ml-2"
+                      title="Close Case Study"
+                    >
+                      <X className="w-5 h-5" />
+                    </button>
                   </div>
                 </div>
 
-                {/* Image banner */}
-                <div className="h-60 rounded-2xl overflow-hidden mb-6 relative border border-amber-200">
-                  <img
-                    src={selectedProject.image}
-                    alt={selectedProject.title}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-
-                {/* Challenge & Solution Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
-                  <div className="p-4 rounded-2xl bg-rose-50 border border-rose-200 space-y-2">
-                    <div className="text-xs font-mono font-bold text-rose-700 uppercase flex items-center gap-1.5">
-                      <ShieldAlert className="w-4 h-4 text-rose-600" />
-                      <span>Deterioration / Challenge</span>
+                {/* Main Content Layout */}
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                  {/* Image + Methodologies + Stats (7 Cols) */}
+                  <div className="lg:col-span-7 space-y-4">
+                    <div className="rounded-2xl overflow-hidden bg-slate-900 border border-slate-200 max-h-[420px] flex items-center justify-center shadow-lg">
+                      <img
+                        src={selectedProject.image}
+                        alt={selectedProject.title}
+                        className="w-full h-auto max-h-[420px] object-cover"
+                      />
                     </div>
-                    <p className="text-xs text-slate-700 leading-relaxed font-normal">
-                      {selectedProject.challenge}
-                    </p>
-                  </div>
-
-                  <div className="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 space-y-2">
-                    <div className="text-xs font-mono font-bold text-emerald-800 uppercase flex items-center gap-1.5">
-                      <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                      <span>Engineered Solution</span>
+                    <div className="flex flex-wrap items-center justify-between gap-2 text-xs font-mono text-slate-500 px-1">
+                      <span className="px-2.5 py-1 bg-yellow-100 border border-yellow-300 rounded text-amber-900 font-bold">
+                        {selectedProject.categoryLabel}
+                      </span>
+                      {selectedProject.highlight && (
+                        <span className="text-emerald-700 font-bold flex items-center gap-1">
+                          <Award className="w-3.5 h-3.5" /> {selectedProject.highlight}
+                        </span>
+                      )}
                     </div>
-                    <p className="text-xs text-slate-700 leading-relaxed font-normal">
-                      {selectedProject.solution}
-                    </p>
-                  </div>
-                </div>
 
-                {/* Techniques List */}
-                <div className="space-y-3 mb-6">
-                  <h4 className="text-xs font-mono uppercase tracking-wider text-amber-800 font-bold">
-                    Key Methodologies & Technologies Deployed
-                  </h4>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                    {selectedProject.techniques.map((tech, i) => (
-                      <div key={i} className="flex items-center gap-2 text-xs text-slate-700">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-amber-600 shrink-0" />
-                        <span className="font-medium">{tech}</span>
+                    {/* Techniques deployed (moved under image) */}
+                    <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200">
+                      <span className="text-xs font-mono text-slate-800 font-bold block mb-2.5 uppercase tracking-wider">
+                        Engineering Methodologies Deployed:
+                      </span>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-1.5 gap-x-4">
+                        {selectedProject.techniques.map((tech, i) => (
+                          <div key={i} className="flex items-center gap-2 text-xs text-slate-700">
+                            <CheckCircle2 className="w-4 h-4 text-amber-600 shrink-0" />
+                            <span>{tech}</span>
+                          </div>
+                        ))}
                       </div>
-                    ))}
-                  </div>
-                </div>
+                    </div>
 
-                {/* Key Stats */}
-                {selectedProject.stats && selectedProject.stats.length > 0 && (
-                  <div className="grid grid-cols-3 gap-3 mb-6 p-3 rounded-2xl bg-amber-50/70 border border-amber-200">
-                    {selectedProject.stats.map((st, i) => (
-                      <div key={i} className="text-center">
-                        <span className="text-[10px] font-mono text-slate-600 uppercase block font-semibold">{st.label}</span>
-                        <strong className="text-xs font-mono text-amber-800 font-black">{st.value}</strong>
+                    {/* Key Stats (moved under image) */}
+                    {selectedProject.stats && selectedProject.stats.length > 0 && (
+                      <div className="grid grid-cols-3 gap-2 p-3 rounded-2xl bg-amber-50/70 border border-amber-200">
+                        {selectedProject.stats.map((st, i) => (
+                          <div key={i} className="text-center">
+                            <span className="text-[10px] font-mono text-slate-600 uppercase block font-semibold">{st.label}</span>
+                            <strong className="text-xs font-mono text-amber-800 font-black">{st.value}</strong>
+                          </div>
+                        ))}
                       </div>
-                    ))}
+                    )}
                   </div>
-                )}
 
-                {/* Modal Actions */}
-                <div className="pt-4 border-t border-amber-100 flex flex-col sm:flex-row gap-3">
-                  <button
-                    onClick={() => {
-                      playClickSound();
-                      const proj = selectedProject.title;
-                      setSelectedProject(null);
-                      onOpenInquiryModal(proj);
-                    }}
-                    className="flex-1 py-3.5 px-4 rounded-xl text-xs font-black uppercase tracking-wider text-slate-950 bg-gradient-to-r from-yellow-400 via-amber-400 to-yellow-400 hover:from-yellow-300 hover:to-amber-500 transition-all text-center shadow-lg shadow-yellow-500/25 cursor-pointer"
-                  >
-                    Consult on Similar Project
-                  </button>
-                  <button
-                    onClick={() => setSelectedProject(null)}
-                    className="py-3.5 px-4 rounded-xl text-xs font-mono text-slate-600 hover:text-slate-950 bg-slate-100 hover:bg-slate-200 border border-slate-200 transition-colors cursor-pointer"
-                  >
-                    Close Case Study
-                  </button>
+                  {/* Project Information & Scope (5 Cols) */}
+                  <div className="lg:col-span-5 space-y-5">
+                    <div>
+                      <div className="text-xs font-mono text-amber-700 font-bold uppercase tracking-wider mb-1">
+                        {selectedProject.clientOrLocation}
+                      </div>
+                      <h3 className="text-xl sm:text-2xl font-black text-slate-950 leading-tight">
+                        {selectedProject.title}
+                      </h3>
+                      {selectedProject.ageOrScale && (
+                        <p className="text-xs font-mono text-slate-600 mt-1 flex items-center gap-1">
+                          <MapPin className="w-3.5 h-3.5 text-amber-600" />
+                          <span>{selectedProject.ageOrScale}</span>
+                        </p>
+                      )}
+                    </div>
+
+                    {/* Challenge */}
+                    <div className="p-4 rounded-2xl bg-rose-50 border border-rose-200 space-y-1.5">
+                      <span className="text-xs font-mono text-rose-700 font-bold uppercase flex items-center gap-1.5">
+                        <ShieldAlert className="w-4 h-4 text-rose-600" />
+                        Deterioration / Challenge
+                      </span>
+                      <p className="text-xs text-slate-700 leading-relaxed">
+                        {selectedProject.challenge}
+                      </p>
+                    </div>
+
+                    {/* Solution */}
+                    <div className="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 space-y-1.5">
+                      <span className="text-xs font-mono text-emerald-800 font-bold uppercase flex items-center gap-1.5">
+                        <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                        Engineered Solution
+                      </span>
+                      <p className="text-xs text-slate-700 leading-relaxed">
+                        {selectedProject.solution}
+                      </p>
+                    </div>
+
+                    {/* Action button */}
+                    <div className="pt-3 border-t border-amber-200 flex flex-col gap-2">
+                      <button
+                        onClick={() => {
+                          playClickSound();
+                          const proj = selectedProject.title;
+                          setSelectedProject(null);
+                          onOpenInquiryModal(proj);
+                        }}
+                        className="w-full py-3 px-4 rounded-xl text-xs font-mono font-bold uppercase tracking-wider text-slate-950 bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 hover:from-yellow-300 hover:to-amber-400 transition-transform hover:scale-[1.02] shadow-md shadow-amber-400/20 text-center cursor-pointer"
+                      >
+                        Consult on Similar Project
+                      </button>
+                    </div>
+
+                  </div>
                 </div>
 
               </motion.div>
             </motion.div>
           )}
-        </AnimatePresence>
+        </AnimatePresence>,
+        document.body
+        )}
 
       </div>
     </section>

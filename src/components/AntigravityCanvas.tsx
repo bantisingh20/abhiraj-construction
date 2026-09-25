@@ -458,7 +458,7 @@ export const AntigravityCanvas: React.FC = () => {
               </span>
             </div>
             <p className="text-[11px] text-slate-500 font-mono hidden sm:block">
-              Drag, throw & float Abhiraj Construction architectural nodes
+              Drag, throw & float Abhiraaj Construction architectural nodes
             </p>
           </div>
         </div>

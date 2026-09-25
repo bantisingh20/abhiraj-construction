@@ -17,7 +17,7 @@ const CLIENT_LIST: ClientItem[] = [
     id: 'chemiesynth',
     name: 'CS Fine Interchem (Chemisynth Group)',
     sector: 'Specialty Chemicals & Pharma Intermediates',
-    relationship: 'Entrusted Abhiraj Construction with complete 25-year structural rehabilitation, chemical plant terrace waterproofing, and CFRP beam strengthening.',
+    relationship: 'Entrusted Abhiraaj Construction with complete 25-year structural rehabilitation, chemical plant terrace waterproofing, and CFRP beam strengthening.',
     brochurePage: 'Page 7, 8, 9 & 15',
     badge: 'Anchor Chemical Client',
   },
@@ -85,7 +85,7 @@ export const ClientsTrust: React.FC = () => {
           </h2>
           
           <p className="text-slate-600 text-sm sm:text-base leading-relaxed font-normal">
-            The exact institutional clients featured on <strong>Page 15 of Abhiraj Construction's official dossier</strong>, showcasing our vetted execution capability across critical plants and industrial assets.
+            The exact institutional clients featured on <strong>Page 15 of Abhiraaj Construction's official dossier</strong>, showcasing our vetted execution capability across critical plants and industrial assets.
           </p>
         </motion.div>
 
@@ -167,7 +167,7 @@ export const ClientsTrust: React.FC = () => {
                 "We deliver quality output — bringing complete confidence to provide long-term warranties on our structural works."
               </h3>
               <p className="text-xs sm:text-sm text-slate-700 leading-relaxed font-normal">
-                "As said earlier, we not only execute, but we also monitor and ensure that we have given quality output, and that brings confidence in us to give long term warranty on the works we have done. <strong className="text-amber-800 font-bold">ABHIRAJ CONSTRUCTIONS makes you feel your structure is safe in its hands.</strong>"
+                "As said earlier, we not only execute, but we also monitor and ensure that we have given quality output, and that brings confidence in us to give long term warranty on the works we have done. <strong className="text-amber-800 font-bold">Abhiraaj CONSTRUCTIONS makes you feel your structure is safe in its hands.</strong>"
               </p>
             </div>
 

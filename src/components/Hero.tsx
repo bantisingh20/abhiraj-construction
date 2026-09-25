@@ -75,7 +75,6 @@ export const Hero: React.FC<HeroProps> = ({ onOpenEstimator, onOpenInquiryModal 
 
   // Hologram Interactive Canvas
   const holoCanvasRef = useRef<HTMLCanvasElement | null>(null);
-  const mousePosRef = useRef<{ x: number; y: number }>({ x: -100, y: -100 });
 
   const activeChannel = CHANNELS[activeChannelIdx];
 
@@ -106,7 +105,6 @@ export const Hero: React.FC<HeroProps> = ({ onOpenEstimator, onOpenInquiryModal 
     if (!ctx) return;
 
     let animId: number;
-    let time = 0;
 
     const particles = Array.from({ length: 45 }, () => ({
       x: Math.random() * 1200,
@@ -126,7 +124,6 @@ export const Hero: React.FC<HeroProps> = ({ onOpenEstimator, onOpenInquiryModal 
     window.addEventListener('resize', handleResize);
 
     const render = () => {
-      time += 0.015;
       const w = canvas.width;
       const h = canvas.height;
       ctx.clearRect(0, 0, w, h);
@@ -148,22 +145,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenEstimator, onOpenInquiryModal 
         ctx.stroke();
       }
 
-      // 2. Vertical Laser Scanner Wave in Vibrant Yellow
-      const scanY = (Math.sin(time * 0.7) * 0.5 + 0.5) * h;
-      const grad = ctx.createLinearGradient(0, scanY - 24, 0, scanY + 24);
-      grad.addColorStop(0, 'rgba(245, 158, 11, 0)');
-      grad.addColorStop(0.5, 'rgba(250, 204, 21, 0.2)');
-      grad.addColorStop(1, 'rgba(245, 158, 11, 0)');
-      ctx.fillStyle = grad;
-      ctx.fillRect(0, scanY - 24, w, 48);
-
-      ctx.strokeStyle = 'rgba(217, 119, 6, 0.5)';
-      ctx.beginPath();
-      ctx.moveTo(0, scanY);
-      ctx.lineTo(w, scanY);
-      ctx.stroke();
-
-      // 3. Floating Engineering Nodes with Connection Lines
+      // Floating Engineering Nodes with Connection Lines
       particles.forEach((p, idx) => {
         p.x += p.vx;
         p.y += p.vy;
@@ -172,17 +154,6 @@ export const Hero: React.FC<HeroProps> = ({ onOpenEstimator, onOpenInquiryModal 
         if (p.x > w) p.x = 0;
         if (p.y < 0) p.y = h;
         if (p.y > h) p.y = 0;
-
-        // Attraction to mouse cursor (playful interactive feel)
-        if (mousePosRef.current.x > 0) {
-          const dx = mousePosRef.current.x - p.x;
-          const dy = mousePosRef.current.y - p.y;
-          const d = Math.hypot(dx, dy);
-          if (d < 170 && d > 10) {
-            p.x += (dx / d) * 0.4;
-            p.y += (dy / d) * 0.4;
-          }
-        }
 
         ctx.fillStyle = `${p.color}0.8)`;
         ctx.beginPath();
@@ -202,24 +173,6 @@ export const Hero: React.FC<HeroProps> = ({ onOpenEstimator, onOpenInquiryModal 
         }
       });
 
-      // Target crosshair near cursor
-      if (mousePosRef.current.x > 0) {
-        const mx = mousePosRef.current.x;
-        const my = mousePosRef.current.y;
-        ctx.strokeStyle = 'rgba(217, 119, 6, 0.6)';
-        ctx.lineWidth = 1;
-        ctx.beginPath();
-        ctx.arc(mx, my, 18, 0, Math.PI * 2);
-        ctx.stroke();
-
-        ctx.beginPath();
-        ctx.moveTo(mx - 24, my);
-        ctx.lineTo(mx + 24, my);
-        ctx.moveTo(mx, my - 24);
-        ctx.lineTo(mx, my + 24);
-        ctx.stroke();
-      }
-
       animId = requestAnimationFrame(render);
     };
 
@@ -229,14 +182,6 @@ export const Hero: React.FC<HeroProps> = ({ onOpenEstimator, onOpenInquiryModal 
       window.removeEventListener('resize', handleResize);
     };
   }, []);
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    mousePosRef.current = {
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top
-    };
-  };
 
   const handleSwitchChannel = (idx: number) => {
     playScanSound();
@@ -263,7 +208,6 @@ export const Hero: React.FC<HeroProps> = ({ onOpenEstimator, onOpenInquiryModal 
   return (
     <section 
       id="hero" 
-      onMouseMove={handleMouseMove}
       className="relative min-h-[95vh] lg:min-h-screen pt-32 sm:pt-40 pb-20 flex flex-col justify-between overflow-hidden bg-white text-slate-900 select-none"
     >
       {/* 1. CINEMATIC VIDEO BACKGROUND WITH WARM ARCHITECTURAL OVERLAY */}
@@ -497,7 +441,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenEstimator, onOpenInquiryModal 
           onClick={playClickSound}
           className="flex items-center gap-2 text-amber-700 font-bold hover:text-amber-900 transition-colors mx-auto sm:mx-0"
         >
-          <span>EXPLORE ABHIRAJ CONSTRUCTION</span>
+          <span>EXPLORE Abhiraaj CONSTRUCTION</span>
           <ChevronDown className="w-4 h-4 animate-bounce text-amber-600" />
         </a>
         <span className="hidden sm:inline font-semibold">VAPI • DAMAN • SILVASSA • MUMBAI</span>

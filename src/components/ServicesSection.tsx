@@ -33,7 +33,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
   const [activeTab, setActiveTab] = useState<string>(SERVICES[0].id);
 
   // Interactive Material Stress & Acid Resistance Simulator State
-  const [barrierType, setBarrierType] = useState<'standard' | 'abhiraj'>('abhiraj');
+  const [barrierType, setBarrierType] = useState<'standard' | 'Abhiraaj'>('Abhiraaj');
   const [acidLevel, setAcidLevel] = useState<number>(85); // 0-100%
   const [hydrostaticPressure, setHydrostaticPressure] = useState<number>(6); // Bar
 
@@ -55,7 +55,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
   };
 
   // Calculate live durability metrics based on barrier type & sliders
-  const isProtected = barrierType === 'abhiraj';
+  const isProtected = barrierType === 'Abhiraaj';
   const ingressDepth = isProtected ? (acidLevel * 0.02).toFixed(1) : (acidLevel * 0.45 + hydrostaticPressure * 3.2).toFixed(1);
   const lifespanYears = isProtected ? Math.max(25, 30 - Math.round(acidLevel * 0.05)) : Math.max(2, 12 - Math.round(acidLevel * 0.1));
   const rebarRustRisk = isProtected ? Math.min(4, Math.round(acidLevel * 0.04)) : Math.min(96, Math.round(acidLevel * 0.75 + hydrostaticPressure * 2.5));
@@ -258,7 +258,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
                 Live Chemical Plant Barrier & Durability Simulator
               </h3>
               <p className="text-xs sm:text-sm text-slate-600 mt-1 max-w-2xl">
-                Simulate acid immersion (H2SO4, HCl) and hydrostatic ground pressure on standard concrete vs. Abhiraj's 4-layer epoxy crystalline armor.
+                Simulate acid immersion (H2SO4, HCl) and hydrostatic ground pressure on standard concrete vs. Abhiraaj's 4-layer epoxy crystalline armor.
               </p>
             </div>
 
@@ -280,15 +280,15 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
               <button
                 onClick={() => {
                   playScanSound();
-                  setBarrierType('abhiraj');
+                  setBarrierType('Abhiraaj');
                 }}
                 className={`px-4 py-2 rounded-xl text-xs font-mono font-black transition-all ${
-                  barrierType === 'abhiraj'
+                  barrierType === 'Abhiraaj'
                     ? 'bg-emerald-600 text-white shadow-md'
                     : 'text-slate-600 hover:text-slate-900'
                 }`}
               >
-                Abhiraj 4-Layer Armor
+                Abhiraaj 4-Layer Armor
               </button>
             </div>
           </div>

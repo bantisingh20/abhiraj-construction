@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
-import { Mail, Phone, MapPin, Send, MessageSquare, ShieldCheck, CheckCircle2, Copy, Check, ArrowRight, ExternalLink, Navigation } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, MessageSquare, CheckCircle2, Copy, Check, Navigation, Clock, Share2 } from 'lucide-react';
 import { COMPANY_DETAILS } from '../data/companyData';
 import { playClickSound, playScanSound } from '../utils/audioFx';
 
@@ -19,6 +19,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialMessage =
   });
 
   const [copiedGst, setCopiedGst] = useState(false);
+  const [copiedLoc, setCopiedLoc] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
   useEffect(() => {
@@ -46,14 +47,43 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialMessage =
   const mapsEmbedUrl = `https://www.google.com/maps?q=${mapsQuery}&output=embed`;
   const mapsDirectUrl = `https://www.google.com/maps/dir/?api=1&destination=${mapsQuery}`;
 
+  const mapsShareUrl = `https://www.google.com/maps/search/?api=1&query=${mapsQuery}`;
+
   const handleOpenMap = () => {
     playClickSound();
     window.open(mapsDirectUrl, '_blank', 'noopener,noreferrer');
   };
 
+  const handleCopyLocation = () => {
+    playClickSound();
+    navigator.clipboard.writeText(`${COMPANY_DETAILS.name}\n${mapsAddress}\n${mapsShareUrl}`);
+    setCopiedLoc(true);
+    setTimeout(() => setCopiedLoc(false), 2000);
+  };
+
+  const handleShareLocation = async () => {
+    playClickSound();
+    const shareData = {
+      title: `${COMPANY_DETAILS.name} — Head Office`,
+      text: `${COMPANY_DETAILS.name}, ${mapsAddress}`,
+      url: mapsShareUrl,
+    };
+    if (navigator.share) {
+      try {
+        await navigator.share(shareData);
+      } catch {
+        /* user cancelled share */
+      }
+    } else {
+      // Fallback: open WhatsApp with the location link
+      const msg = encodeURIComponent(`${shareData.text}\n${shareData.url}`);
+      window.open(`https://wa.me/?text=${msg}`, '_blank', 'noopener,noreferrer');
+    }
+  };
+
   const handleWhatsApp = () => {
     playScanSound();
-    const msg = `Hello Mr. Abhinay Palkar (Abhiraj Construction),%0A%0AI would like to discuss an engineering/architectural project:%0A- Name: ${formData.name || 'Prospective Client'}%0A- Phone: ${formData.phone || 'N/A'}%0A- Scope: ${formData.projectType}%0A- City/Site: ${formData.city}%0A- Message: ${formData.message || 'Please share your technical audit availability.'}`;
+    const msg = `Hello Mr. Abhinay Palkar (Abhiraaj Construction),%0A%0AI would like to discuss an engineering/architectural project:%0A- Name: ${formData.name || 'Prospective Client'}%0A- Phone: ${formData.phone || 'N/A'}%0A- Scope: ${formData.projectType}%0A- City/Site: ${formData.city}%0A- Message: ${formData.message || 'Please share your technical audit availability.'}`;
     window.open(`https://wa.me/91${COMPANY_DETAILS.rawPhone}?text=${msg}`, '_blank');
   };
 
@@ -106,7 +136,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialMessage =
                   >
                     {COMPANY_DETAILS.phone}
                   </a>
-                  <span className="text-xs text-slate-500 font-mono">Mr. Abhinay Palkar (Owner/MD)</span>
+                  <span className="text-xs text-slate-500 font-mono">Abhinay Palkar</span>
                 </div>
                 <a
                   href={`tel:${COMPANY_DETAILS.rawPhone}`}
@@ -153,6 +183,15 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialMessage =
                 {COMPANY_DETAILS.address.line2}
               </p>
 
+              {/* Working Days & Hours */}
+              <div className="flex items-center gap-2 p-2.5 rounded-xl bg-amber-50/70 border border-amber-200">
+                <Clock className="w-4 h-4 text-amber-600 shrink-0" />
+                <div className="font-mono leading-tight">
+                  <span className="text-[10px] text-slate-500 uppercase font-bold block">Working Days & Hours</span>
+                  <strong className="text-slate-900">{COMPANY_DETAILS.hours}</strong>
+                </div>
+              </div>
+
               {/* Embedded Google Map */}
               <div className="relative rounded-2xl overflow-hidden border border-amber-200 shadow-inner group">
                 <iframe
@@ -169,17 +208,35 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialMessage =
                 <div className="absolute inset-0 pointer-events-none ring-1 ring-inset ring-yellow-400/20 rounded-2xl" />
               </div>
 
-              <div className="flex items-center justify-between gap-3 pt-1">
-                <div className="text-slate-500 font-mono">
-                  Email: <strong className="text-slate-900">{COMPANY_DETAILS.email}</strong>
-                </div>
+              <div className="text-slate-500 font-mono pt-1">
+                Email: <strong className="text-slate-900">{COMPANY_DETAILS.email}</strong>
+              </div>
+
+              {/* Location Actions: Directions / Copy / Share */}
+              <div className="grid grid-cols-3 gap-2 pt-1">
                 <button
                   onClick={handleOpenMap}
-                  className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-gradient-to-r from-yellow-400 to-amber-500 text-slate-950 font-bold font-mono text-[11px] shadow-md shadow-yellow-500/25 hover:scale-105 transition-transform cursor-pointer shrink-0"
+                  className="flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-xl bg-gradient-to-r from-yellow-400 to-amber-500 text-slate-950 font-bold font-mono text-[11px] shadow-md shadow-yellow-500/25 hover:scale-105 transition-transform cursor-pointer"
+                  title="Open directions in Google Maps"
                 >
-                  <MapPin className="w-3.5 h-3.5" />
-                  <span>Get Directions</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
+                  <Navigation className="w-3.5 h-3.5" />
+                  <span>Directions</span>
+                </button>
+                <button
+                  onClick={handleCopyLocation}
+                  className="flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-xl bg-white border border-amber-300 text-slate-700 hover:text-slate-900 hover:bg-amber-50 font-bold font-mono text-[11px] transition-colors cursor-pointer"
+                  title="Copy location address & link"
+                >
+                  {copiedLoc ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5 text-amber-600" />}
+                  <span>{copiedLoc ? 'Copied' : 'Copy'}</span>
+                </button>
+                <button
+                  onClick={handleShareLocation}
+                  className="flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-xl bg-white border border-amber-300 text-slate-700 hover:text-slate-900 hover:bg-amber-50 font-bold font-mono text-[11px] transition-colors cursor-pointer"
+                  title="Share location"
+                >
+                  <Share2 className="w-3.5 h-3.5 text-amber-600" />
+                  <span>Share</span>
                 </button>
               </div>
             </div>

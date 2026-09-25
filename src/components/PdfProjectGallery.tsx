@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
   Briefcase, MapPin, X, ShieldAlert, CheckCircle2, ArrowUpRight, 
@@ -363,7 +364,7 @@ export const PdfProjectGallery: React.FC<GalleryProps> = ({ onOpenInquiryModal }
               <span className="text-gold-gradient font-serif italic">Every Site Photo From Official Dossier</span>
             </h2>
             <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
-              Authentic on-site photographs directly extracted from <strong>Pages 7 to 14 of Abhiraj Construction's Corporate Dossier</strong>. Click any photograph to inspect engineering techniques and site scope in high resolution.
+              Authentic on-site photographs directly extracted from <strong>Pages 7 to 14 of Abhiraaj Construction's Corporate Dossier</strong>. Click any photograph to inspect engineering techniques and site scope in high resolution.
             </p>
           </motion.div>
 
@@ -488,20 +489,26 @@ export const PdfProjectGallery: React.FC<GalleryProps> = ({ onOpenInquiryModal }
           </AnimatePresence>
         </motion.div>
 
-        {/* Detailed High-Resolution Lightbox Modal */}
+        {/* Detailed High-Resolution Lightbox Modal (portaled to body) */}
+        {createPortal(
         <AnimatePresence>
           {selectedPhoto && (
             <motion.div 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-xl"
+              onClick={() => {
+                playClickSound();
+                setSelectedPhoto(null);
+              }}
+              className="fixed inset-0 z-[100] flex items-start justify-center px-4 pt-36 pb-8 bg-slate-950/80 backdrop-blur-xl overflow-y-auto"
             >
               <motion.div 
                 initial={{ scale: 0.95, y: 20 }}
                 animate={{ scale: 1, y: 0 }}
                 exit={{ scale: 0.95, y: 20 }}
-                className="bg-white rounded-3xl max-w-4xl w-full p-6 sm:p-8 shadow-2xl relative max-h-[92vh] overflow-y-auto border-2 border-amber-300 text-slate-900"
+                onClick={(e) => e.stopPropagation()}
+                className="bg-white rounded-3xl max-w-4xl w-full mx-auto p-6 sm:p-8 shadow-2xl relative max-h-[calc(100vh-11rem)] overflow-y-auto border-2 border-amber-300 text-slate-900"
               >
                 {/* Modal Header Bar */}
                 <div className="flex items-center justify-between border-b border-amber-200 pb-4 mb-5">
@@ -510,7 +517,7 @@ export const PdfProjectGallery: React.FC<GalleryProps> = ({ onOpenInquiryModal }
                       {selectedPhoto.brochurePage}
                     </span>
                     <span className="text-xs font-mono text-slate-500 hidden sm:inline">
-                      ● Official Abhiraj Construction Engineering Archive
+                      ● Official Abhiraajj Construction Engineering Archive
                     </span>
                   </div>
 
@@ -618,7 +625,9 @@ export const PdfProjectGallery: React.FC<GalleryProps> = ({ onOpenInquiryModal }
               </motion.div>
             </motion.div>
           )}
-        </AnimatePresence>
+        </AnimatePresence>,
+        document.body
+        )}
 
       </div>
     </section>

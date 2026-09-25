@@ -1,7 +1,7 @@
 import { ProjectItem, ServiceItem, RetrofittingTech, ClientPartner } from '../types';
 
 export const COMPANY_DETAILS = {
-  name: 'Abhiraj Construction',
+  name: 'Abhiraaj Construction',
   tagline: 'Building Dreams into Reality',
   taglineSecondary: 'Specialized Engineering & Construction Company',
   owner: 'Mr. Abhinay Palkar',
@@ -9,7 +9,7 @@ export const COMPANY_DETAILS = {
   gstin: '24CHEPP6508H1ZB',
   phone: '+91 9987832111',
   rawPhone: '9987832111',
-  email: 'abhirajconstruction@gmail.com',
+  email: 'Abhiraajconstruction@gmail.com',
   address: {
     line1: '812, A Wing, Sonorous, Opp. Circuit House',
     line2: 'Railway Station Road, Vapi, Gujarat - 396191',
@@ -18,7 +18,7 @@ export const COMPANY_DETAILS = {
     country: 'India',
   },
   hours: 'Mon - Sat: 9:00 AM - 7:30 PM',
-  about: `We take pride in being more than just a construction company; we are creators of enduring structures and industrial spaces of your vision. Established in 2025, ABHIRAJ CONSTRUCTION has evolved as a symbol of innovation, engineering excellence, and trust in the construction & architectural engineering industry. From heavy industrial plants to high-rise residential towers and luxury estates, our multidisciplinary team of structural engineers, architects, project managers, and precision craftsmen deliver turnkey certainty with an unwavering commitment to structural safety and long-term execution warranty.`,
+  about: `We take pride in being more than just a construction company; we are creators of enduring structures and industrial spaces of your vision. Established in 2025, Abhiraaj CONSTRUCTION has evolved as a symbol of innovation, engineering excellence, and trust in the construction & architectural engineering industry. From heavy industrial plants to high-rise residential towers and luxury estates, our multidisciplinary team of structural engineers, architects, project managers, and precision craftsmen deliver turnkey certainty with an unwavering commitment to structural safety and long-term execution warranty.`,
 };
 
 export const STATS = [
@@ -179,7 +179,7 @@ export const PROJECTS: ProjectItem[] = [
     challenge: 'Severe structural deterioration observed during comprehensive engineering audit: concrete cover delamination, extensive beam honeycombing, spalled concrete exposing corroded reinforcement, and widespread structural & non-structural fissures.',
     solution: 'Successfully deployed a multi-stage structural rescue regimen: precision RCC jacketing, Polymer Modified Mortar (PMM) patch repairs, MS structural steel fabrication, and advanced CFRP (Carbon Fiber) wrapping to restore beam load factors, followed by chemical membrane waterproofing.',
     techniques: ['CFRP Carbon Fiber Wrapping', 'RCC Jacketing', 'PMM Structural Repair', 'MS Steel Fabrication', 'Chemical Membrane Waterproofing'],
-    image: 'https://images.unsplash.com/photo-1541888946425-d0fbb18086f6?auto=format&fit=crop&w=1200&q=80',
+    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_Js02TvLQ_auUdD77WCc3lyPmQKp0jlOZN1uRvJMkUVsVO_DDqdSbLFU&s=10',
     stats: [
       { label: 'Plant Age', value: '25 Years' },
       { label: 'Techniques', value: 'CFRP + RCC' },
@@ -307,7 +307,7 @@ export const CLIENTS: ClientPartner[] = [
   {
     name: 'Chemiesynth Group',
     sector: 'Specialty Chemicals & Fine Intermediates',
-    description: 'CS Fine Interchem Pvt. Ltd. - Entrusted Abhiraj Construction with complete 25-year structural rehabilitation, CFRP wrapping, and plant retrofitting.',
+    description: 'CS Fine Interchem Pvt. Ltd. - Entrusted Abhiraaj Construction with complete 25-year structural rehabilitation, CFRP wrapping, and plant retrofitting.',
     badge: 'Anchor Client',
   },
   {

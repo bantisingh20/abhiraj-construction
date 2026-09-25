@@ -6,7 +6,7 @@ import {
   ExternalLink, ArrowUpRight, Compass, Shield
 } from 'lucide-react';
 import { COMPANY_DETAILS } from '../data/companyData';
-import { AbhirajLogo } from './BrandLogos';
+import { AbhiraajLogo } from './BrandLogos';
 import { playClickSound, playScanSound } from '../utils/audioFx';
 
 interface AboutSectionProps {
@@ -44,7 +44,7 @@ const MILESTONES = [
   },
   {
     year: '2025-26',
-    title: 'Abhiraj Construction Consolidation',
+    title: 'Abhiraaj Construction Consolidation',
     desc: 'Official incorporation and GST registration. Offering verified 10-Year Execution Warranties across Pan-India projects.',
     tag: 'GST REGISTERED',
     stat: '10-Yr Certified'
@@ -81,7 +81,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onOpenInquiryModal }
             <span className="text-gold-gradient font-serif italic">Industrial Realities</span>
           </h2>
           <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
-            Led by <strong className="text-slate-950 font-bold">{COMPANY_DETAILS.owner}</strong>, <strong className="text-amber-700 font-bold">ABHIRAJ CONSTRUCTION</strong> unites 18+ years of field civil engineering with aerospace-grade composite retrofitting and bespoke architectural craftsmanship.
+            Led by <strong className="text-slate-950 font-bold">{COMPANY_DETAILS.owner}</strong>, <strong className="text-amber-700 font-bold">Abhiraaj CONSTRUCTION</strong> unites 18+ years of field civil engineering with aerospace-grade composite retrofitting and bespoke architectural craftsmanship.
           </p>
         </motion.div>
 
@@ -101,13 +101,13 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onOpenInquiryModal }
             >
               <div className="text-xs font-mono text-amber-800 font-bold mb-3 flex items-center gap-2">
                 <span className="w-2.5 h-2.5 rounded-full bg-amber-500 animate-ping" />
-                <span>DIRECTOR'S STATEMENT • ABHIRAJ CONSTRUCTION</span>
+                <span>DIRECTOR'S STATEMENT • Abhiraaj CONSTRUCTION</span>
               </div>
               <h3 className="text-xl sm:text-2xl font-bold text-slate-950 mb-4 leading-snug">
                 "We aim to be more than just your construction team — we are your partner in the journey."
               </h3>
               <p className="text-slate-600 text-sm leading-relaxed mb-4">
-                Understanding that embarking on a construction or plant retrofitting project is a momentous endeavor, our commitment is to make your engineering experience seamless, cost-effective, and successful. When you choose Abhiraj Construction, you choose a team that shares your vision and works tirelessly to bring it into reality.
+                Understanding that embarking on a construction or plant retrofitting project is a momentous endeavor, our commitment is to make your engineering experience seamless, cost-effective, and successful. When you choose Abhiraaj Construction, you choose a team that shares your vision and works tirelessly to bring it into reality.
               </p>
               <p className="text-slate-600 text-sm leading-relaxed">
                 From structural architects and civil engineers to project managers and master craftsmen, our multidisciplinary team brings collective knowledge and unwavering commitment to make every structure endure for generations.
@@ -213,7 +213,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onOpenInquiryModal }
                     </span>
                   </h4>
                   <p className="text-xs sm:text-sm text-slate-700 leading-relaxed">
-                    "We not only execute, but we also inspect, test, and continuously monitor to ensure we deliver quality output. That brings confidence in us to give long-term warranties on our structural works. Abhiraj Construction guarantees your structure is safe in our hands."
+                    "We not only execute, but we also inspect, test, and continuously monitor to ensure we deliver quality output. That brings confidence in us to give long-term warranties on our structural works. Abhiraaj Construction guarantees your structure is safe in our hands."
                   </p>
                 </div>
               </div>
@@ -235,7 +235,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onOpenInquiryModal }
               <div className="flex items-center justify-between border-b border-amber-200 pb-4 mb-6">
                 <div>
                   <div className="mb-2">
-                    <AbhirajLogo variant="full" />
+                    <AbhiraajLogo variant="full" />
                   </div>
                   <h4 className="text-xs font-mono text-amber-800 uppercase tracking-wider font-bold">
                     Official Corporate Credentials
@@ -380,7 +380,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onOpenInquiryModal }
                   </div>
 
                   <p className="text-[11px] text-slate-600 leading-relaxed font-normal">
-                    Certified for structural integrity, micro-concrete tensile load, and hydrostatic waterproofing barrier under direct engineering oversight of Abhiraj Construction.
+                    Certified for structural integrity, micro-concrete tensile load, and hydrostatic waterproofing barrier under direct engineering oversight of Abhiraaj Construction.
                   </p>
 
                   {/* Stamp Graphic with Interactive Sound */}

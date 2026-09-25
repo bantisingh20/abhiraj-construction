@@ -5,7 +5,7 @@ import {
   Volume2, VolumeX, Sparkles, MapPin, Building2, Camera
 } from 'lucide-react';
 import { COMPANY_DETAILS } from '../data/companyData';
-import { AbhirajLogo } from './BrandLogos';
+import { AbhiraajLogo } from './BrandLogos';
 import { playClickSound, toggleAudioMute, getAudioMuteState } from '../utils/audioFx';
 
 interface NavbarProps {
@@ -112,7 +112,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenEstimator, onOpenInquiryMo
             onClick={playClickSound}
             className="flex items-center group transition-transform hover:scale-[1.02]"
           >
-            <AbhirajLogo variant="full" />
+            <AbhiraajLogo variant="full" />
           </a>
 
           {/* Center Links (Desktop) */}

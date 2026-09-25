@@ -122,7 +122,7 @@ export const StructuralScanner: React.FC = () => {
             <div className="space-y-2">
               <div className="flex justify-between text-xs font-mono text-slate-600">
                 <span className="text-rose-600 font-semibold">← 25-Yr Deteriorated State</span>
-                <span className="text-emerald-700 font-semibold">Abhiraj CFRP Restored →</span>
+                <span className="text-emerald-700 font-semibold">Abhiraaj CFRP Restored →</span>
               </div>
               <input
                 type="range"
@@ -188,10 +188,10 @@ export const StructuralScanner: React.FC = () => {
                 </div>
               </div>
 
-              {/* Abhiraj CFRP Reinforcement */}
+              {/* Abhiraaj CFRP Reinforcement */}
               <div className="p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 flex justify-between items-center">
                 <div>
-                  <span className="text-emerald-900 font-semibold block text-[11px]">With Abhiraj CFRP Wrap:</span>
+                  <span className="text-emerald-900 font-semibold block text-[11px]">With Abhiraaj CFRP Wrap:</span>
                   <span className="text-[10px] text-emerald-700">High-tensile epoxy jacket</span>
                 </div>
                 <div className="text-right">
